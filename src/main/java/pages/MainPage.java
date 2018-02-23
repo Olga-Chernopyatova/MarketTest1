@@ -8,17 +8,18 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
 
-    @FindBy (xpath = "//*[contains(text(),'маркет')]")
+    //данным локатором определим всю панельку меню
+    @FindBy (xpath = "//div[@class='home-arrow__tabs']")
     WebElement mainMenu;
 
 
     public MainPage(WebDriver driver){
-
         PageFactory.initElements(driver, this);
     }
 
+    //метод выбирает в зависимости от параметра любой пункт главного меню, не только маркет
     public void selectMenuItem(String menuItem){
-        mainMenu.findElement(By.xpath("//*[contains(text(),'маркет')]")).click();
+        mainMenu.findElement(By.xpath(".//*[contains(text(),'"+menuItem+"')]")).click();
 
 }
 

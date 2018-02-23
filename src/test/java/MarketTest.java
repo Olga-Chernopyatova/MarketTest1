@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Title;
 import steps.*;
 
-import java.sql.Driver;
 import java.util.HashMap;
 
 public class MarketTest extends BaseSteps {
@@ -29,14 +28,14 @@ public class MarketTest extends BaseSteps {
         testData.put("от", "20000");
 
 
-        MainPageSteps.selectMenuItem("Маркет");
+    //    MainPageSteps.selectMenuItem("Маркет");
 
-        ChooseElectronicsTVSteps.checkPageTitle("Яндекс маркет");
-        ChooseElectronicsTVSteps.selectMenuItem("Электроника");
-        ChooseElectronicsTVSteps.selectMenuType("Телевизоры");
+//        ChooseElectronicsTVSteps.checkPageTitle("Яндекс маркет");
+//        ChooseElectronicsTVSteps.selectMenuItem("Электроника");
+//        ChooseElectronicsTVSteps.selectMenuType("Телевизоры");
 
-        sendAppSteps.fillFields();
-        sendAppSteps.stepClickToBanner();
+//        sendAppSteps.fillFields();
+
 
     }
 
@@ -49,7 +48,7 @@ public class MarketTest extends BaseSteps {
         WebElement sendbtn= driver.findElement(By.xpath("//*[contains(@class, 'topmenu__subitem_nid_59601')]"));
         wait.until(ExpectedConditions.visibilityOf(sendbtn)).click();
 
-        Assert.assertEquals("Телевизоры", title.getText());
+//        Assert.assertEquals("Телевизоры", title.getText());
 
         driver.findElement(By.xpath("//*[@id='glf-pricefrom-var']"));
 
@@ -69,4 +68,4 @@ public class MarketTest extends BaseSteps {
     }
 
 }
-    }
+

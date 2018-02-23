@@ -3,42 +3,26 @@ package steps;
 import pages.ChooseElectronicsTVPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.sql.Driver;
-
 import static org.junit.Assert.assertTrue;
 
 public class ChooseElectronicsTVSteps {
-    public static selectMenuItem(String) {
-    }
 
-    public static stepGoToSendAppPage() {
-    }
-
-    public static selectMenuType(String) {
-    }
-
-    public static stepSwitchToWindow() {
-    }
     @Step("заголовок страницы - Яндекс маркет равен {0}")
     public static void checkPageTitle(String expectedTitle){
-        String actualTitle = new ChooseElectronicsTVPage().title.getText();
+        String actualTitle = "";//new ChooseElectronicsTVPage().title.getText();
         assertTrue(String.format("Заголовок равен [%s]. Ожидалось - [%s]",
                 actualTitle, expectedTitle), actualTitle.contains(expectedTitle));
     }
 
     @Step("выполнено нажатие на Электроника")
-    public static void selectMenuItem(){
-        new ChooseElectronicsTVPage().sendAppBtn.click();
+    public  void selectMenuItem(String menuItem){
+        new ChooseElectronicsTVPage().moveToMenu(menuItem);
     }
 
 
     @Step ("выбран тип электроники {0}")
-    public static void selectMenuItem(String menuItem) {
-        new ChooseElectronicsTVPage(Driver).selectSubMenu(menuItem);}
+    public  void selectTypeProductItem(String menuItem) {
+        new ChooseElectronicsTVPage().selectSubMenu(menuItem);}
 
-    @Step ("выплнено переключение в новое окно")
-    public static void stepSwitchToWindow(){
-        ChooseElectronicsTVSteps.stepSwitchToWindow();
-    }
 
 }

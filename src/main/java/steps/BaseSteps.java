@@ -1,7 +1,8 @@
 package steps;
 
-import org.junit.After;
-import org.junit.Before;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -19,6 +20,9 @@ public class BaseSteps {
     protected static WebDriver driver;
     protected static String baseUrl;
     public static Properties properties = TestProperties.getInstance().getProperties();
+
+    //для кукумбера импортировать аннотации Before надо из библиотеки import cucumber.api.java.Before;
+    //у тебя было из jUNIT, поэтому при запуске тест просто пропускал эти шаги
 
     @Before
     public static void setUp() {

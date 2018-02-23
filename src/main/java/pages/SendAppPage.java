@@ -1,49 +1,38 @@
 package pages;
 
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.sql.Driver;
 
 public class SendAppPage {
 
     @FindBy(xpath="//*[@id='glf-pricefrom-var']")
     public WebElement pricefrom;
 
-    Driver.findElement(By.name("LG")).click();
-    Driver.findElement(By.name("Samsung")).click();
+    @FindBy(xpath="//*[text()='Samsung']")
+    public WebElement samsungTV;
 
-    Driver.findElement(By.xpath("//*[contains(text(),'Применить')]")).click();
+    //Убрала Driver.findElement(By.name("LG")).click(); - Driver этот класс не относится к селениуму
+    //если посмотреть на импортыб то он лежит в библиотекe import java.sql.Driver; у него нет метода findElement, поэтому проект не компилировался
+    // By.name("Samsung") - локатор не правильный, у веб-элемента не бвло атрибута name, ищем элмент по тексту
+
 
     public SendAppPage(WebDriver driver){
-
         PageFactory.initElements(driver, this);
-        (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOf(sendBtn));
     }
 
     public void fillField(String field, String value) {
         switch (field) {
-            case "insured0_surname":
+            case "pricefrom":
                 fillField(pricefrom, value);
                 break;
-            case "LG":
-            Driver.findElement(By.name("LG")).click();
-                break;
             case "Samsung":
-            Driver.findElement(By.name("Samsung")).click();
+                samsungTV.click();
                 break;
-
             default:
                 throw new AssertionError("Поле '" + field + "' отсутствует на странице");
 
-                Driver.findElement(By.xpath("//*[contains(text(),'Применить')]")).click();
         }
     }
 
@@ -60,4 +49,6 @@ public class SendAppPage {
         element.clear();
         element.sendKeys(value);
     }
+
+
 }
