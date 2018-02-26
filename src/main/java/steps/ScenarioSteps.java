@@ -10,44 +10,44 @@ public class ScenarioSteps {
     SendAppSteps sendAppSteps = new SendAppSteps();
     CheckResultSteps  checkResultsSteps = new CheckResultSteps();
 
+    // используем объекты нужных классов степов которые создали - MainPageSteps mainPageSteps = new MainPageSteps(); и т.д
+    //не надо делать статические методы для степов, получим из-за это NullPointerException
+    //методы степов должны быть динамическими
     @When("^выбран пункт меню \"(.+)\"$")
     public void selectMenuItem(String menuItem){
-        MainPageSteps.selectMenuItem(menuItem);
+        mainPageSteps.selectMenuItem(menuItem);
     }
 
     @When("^выбрана группа товаров \"(.+)\"$")
-    public void selectMenuItem(String menuName){
-        ChooseElectronicsTVSteps.selectMenuItem(menuName);
+    public void selectMenuGroupItem(String menuName){
+        chooseElectronicsTVSteps.selectMenuItem(menuName);
     }
 
-    @When ("выполнен выбор типа электроники Телевизоры")
-    public void selectMenuItem() {
-        ChooseElectronicsTVSteps.selectMenuItem();
+    @When ("выполнен выбор типа электроники \"(.+)\"$")
+    public void selectMenuProductTypeItem(String menuName) {
+        chooseElectronicsTVSteps.selectTypeProductItem(menuName);
     }
 
-    @When("выплнено переключение в новое окно")
-    public void stepSwitchToWindow(){
-        ChooseElectronicsTVSteps.stepSwitchToWindow();
-    }
-
-    @When("заполняются поля")
-    public void fillForm(DataTable fields){
+    @When("заполняются поля:")
+    public void fillForm(DataTable fields) {
         fields.asMap(String.class, String.class)
-                .forEach((field, value) -> SendAppSteps.fillField(field, value));
-
-        @When("выполнено нажатие на Применить")
-    public void stepClickToBanner() {
-        SendAppSteps.stepClickToBanner();
+                .forEach((field, value) -> sendAppSteps.fillField(field, value));
     }
-        @When("заполнено поле поиска")
-        public void fillForm(DataTable fields){
-            fields.asMap(String.class, String.class)
-                    .forEach((field, value) -> CheckResultSteps.fillField(field, value));
 
-        @When("выполнено нажатие на Найти")
-        public void stepClickToBanner() {
-            CheckResultSteps.stepClickToBanner();
-        }
-
+    @When("найдено (.*) товаров")
+    public void stepClickToBanner(Integer count) {
+        checkResultsSteps.checkCountProducts(count);
     }
+
+    @When("заполнено поле поиска значением (.*)")
+    public void fillSearchField(String searchInput){
+        checkResultsSteps.fillFieldSeacrh(searchInput);
+    }
+
+    @When("выполнено нажатие на Найти")
+    public void stepClickToSearch() {
+        CheckResultSteps.stepClickToBanner();
+    }
+
+
 }
